@@ -1,0 +1,18 @@
+# Compilação e Artefatos do CMake
+/build/
+/.cmake/
+/CMakeUserPresets.json
+
+# Arquivos gerados pelo VS Code
+/.vscode/
+
+# Binários e Executáveis salvos no projeto
+/*.exe
+/*.out
+/*.app
+
+# Arquivos temporários do compilador
+*.o
+*.obj
+*.pdb
+*.ilk
