@@ -6,12 +6,15 @@ int main() {
     InitWindow(Constants::windowWidth, Constants::windowHeigth, "Jogao");
     SetTargetFPS(Constants::FPS);
 
+    Map map {};
+    map.createMap();
+
     while(!WindowShouldClose()){
         
         BeginDrawing();
 
         ClearBackground(BLACK);
-        DrawRectangle(300, 300, 10, 10, RED);
+        map.drawMap();
         
         EndDrawing();
     }
