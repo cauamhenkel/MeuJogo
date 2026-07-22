@@ -21,5 +21,4 @@ namespace Constants{
     inline constexpr int windowHeigth {tileHeigth * tiles + header};
 }
 
-
 #endif

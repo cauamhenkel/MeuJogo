@@ -1,3 +1,6 @@
+#ifndef MAP_H
+#define MAP_H
+
 #include "my_game.hpp"
 
 template <typename T, std::size_t Row, std::size_t Col>
@@ -25,3 +28,5 @@ public:
 };
 
 void drawTile(int posX, int posY, Color color);
+
+#endif
