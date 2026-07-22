@@ -1,4 +1,4 @@
-#include "my_game.hpp"
+#include "game.hpp"
 #include "map.hpp"
 #include "player.hpp"
 

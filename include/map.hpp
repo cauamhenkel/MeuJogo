@@ -1,7 +1,7 @@
 #ifndef MAP_H
 #define MAP_H
 
-#include "my_game.hpp"
+#include "game.hpp"
 
 template <typename T, std::size_t Row, std::size_t Col>
 using Array2d = std::array<std::array<T, Col>, Row>;

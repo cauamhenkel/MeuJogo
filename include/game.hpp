@@ -1,5 +1,5 @@
-#ifndef MY_GAME_HPP
-#define MY_GAME_HPP
+#ifndef GAME_HPP
+#define GAME_HPP
 
 #include <array>
 #include <string>

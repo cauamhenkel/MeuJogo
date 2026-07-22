@@ -1,12 +1,18 @@
 #ifndef ENTITY_H
 #define ENTITY_H
 
-#include "my_game.hpp"
+#include "game.hpp"
 #include "map.hpp"
 
 enum class Direction{
     Left,
     Right
+};
+
+enum class EntityState{
+    InGround,
+    InAir,
+    InStairs
 };
 
 struct Entity{
@@ -19,6 +25,7 @@ struct Entity{
     double velY {};
     double accY {};
     Direction direction {Direction::Right};
+    EntityState state {EntityState::InGround};
 
     void movePosX(int moveX, Direction direction);
 };

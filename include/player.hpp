@@ -1,13 +1,8 @@
 #ifndef PLAYER_H
 #define PLAYER_H
 
-#include "my_game.hpp"
+#include "game.hpp"
 #include "entity.hpp" // includes map.hpp
-
-enum class PlayerState{
-    inGround,
-    inAir
-};
 
 class Player{
 private:
