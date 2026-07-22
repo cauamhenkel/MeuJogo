@@ -1,5 +1,6 @@
 #include "my_game.hpp"
 #include "map.hpp"
+#include "player.hpp"
 
 int main() {
     
@@ -10,14 +11,22 @@ int main() {
     map.createMap();
     map.createImageMap();
 
+    Player player {};
+    player.placeInMap(map);
+
     while(!WindowShouldClose()){
         
+        updatePlayer(player);
+
         BeginDrawing();
 
         ClearBackground(BLACK);
-        map.drawMap();
         
+        map.drawMap();
+        player.drawPlayer();
+
         EndDrawing();
+
     }
     
     CloseWindow();

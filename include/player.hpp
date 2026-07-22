@@ -2,15 +2,28 @@
 #define PLAYER_H
 
 #include "my_game.hpp"
-#include "entity.hpp"
+#include "entity.hpp" // includes map.hpp
+
+enum class PlayerState{
+    inGround,
+    inAir
+};
 
 class Player{
-    Entity m_body;
 private:
-    
+    Entity m_body;
 
 public:
+    Player() {
+        m_body.velX = Constants::tileWidth / 5;
+    }
 
+    void placeInMap(const Map& map);
+    void drawPlayer();
+
+    void updatePositionX();
 };
+
+void updatePlayer(Player& player);
 
 #endif

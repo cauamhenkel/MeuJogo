@@ -9,14 +9,18 @@ enum class Direction{
     Right
 };
 
-class Entity{
-private:
-    int m_posX {};
-    int m_posY {};
+struct Entity{
+    static constexpr float gravity {Constants::tileHeigth / 22};
+
+    int posX {};
+    double velX {};
+    double accX {};
+    int posY {};
+    double velY {};
+    double accY {};
     Direction direction {Direction::Right};
 
-public:
-
+    void movePosX(int moveX, Direction direction);
 };
 
 #endif

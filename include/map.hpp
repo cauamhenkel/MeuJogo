@@ -5,10 +5,11 @@
 
 template <typename T, std::size_t Row, std::size_t Col>
 using Array2d = std::array<std::array<T, Col>, Row>;
+using MapGrid = Array2d<char, Constants::tiles, Constants::tiles>;
 
 class Map{
 private:
-    Array2d<char, Constants::tiles, Constants::tiles> m_map {};
+    MapGrid m_map {};
     RenderTexture2D m_mapImage {};
 
 public:
@@ -25,6 +26,8 @@ public:
     void createImageMap();
     // draw the map
     void drawMap();
+
+    const MapGrid& getTiles() const;
 };
 
 void drawTile(int posX, int posY, Color color);

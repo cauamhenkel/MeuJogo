@@ -51,6 +51,15 @@ void Map::drawImageMap(){
         }
     }
 }
+// auxiliar function
+void drawTile(int posX, int posY, Color color){
+    DrawRectangle(
+        posX * Constants::tileWidth, 
+        posY * Constants::tileHeigth, 
+        Constants::tileWidth, 
+        Constants::tileHeigth, 
+        color);
+}
 
 void Map::createImageMap(){
     m_mapImage = LoadRenderTexture(Constants::windowWidth, Constants::windowHeigth);
@@ -68,11 +77,9 @@ void Map::drawMap(){
         m_mapImage.texture, 
         Rectangle{0, 0, (float)m_mapImage.texture.width, (float)-m_mapImage.texture.height}, 
         Vector2{0, 0}, 
-        WHITE
-    );
+        WHITE);
 }
 
-void drawTile(int posX, int posY, Color color){
-    DrawRectangle(posX * Constants::tileWidth, posY * Constants::tileHeigth + Constants::header, Constants::tileWidth, 
-        Constants::tileHeigth, color);
+const MapGrid& Map::getTiles() const{
+    return m_map;
 }

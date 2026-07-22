@@ -16,9 +16,8 @@ namespace Constants{
     inline constexpr int tileWidth {20};
     inline constexpr int tileHeigth {20};
 
-    inline constexpr int header {tileHeigth * 2};
     inline constexpr int windowWidth {tileWidth * tiles};
-    inline constexpr int windowHeigth {tileHeigth * tiles + header};
+    inline constexpr int windowHeigth {tileHeigth * tiles};
 }
 
 #endif
