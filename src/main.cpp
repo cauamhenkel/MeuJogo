@@ -1,6 +1,7 @@
 #include "game.hpp"
 #include "map.hpp"
 #include "player.hpp"
+#include "menus.hpp"
 
 int main() {
     
@@ -14,16 +15,50 @@ int main() {
     Player player {};
     player.placeInMap(map);
 
+    GameState gameState {GameState::InGame};
+
     while(!WindowShouldClose()){
-        
-        updatePlayer(player);
+        switch (gameState){
+        case GameState::MainMenu:
+            mainMenuHandling(gameState);
+            break;
+
+        case GameState::InGame:
+            updatePlayer(player);
+            break;
+
+        case GameState::Paused:
+            break;
+
+        case GameState::Victory:
+            break;
+
+        case GameState::Defeat:
+            break;
+        }
 
         BeginDrawing();
-
-        ClearBackground(BLACK);
         
-        map.drawMap();
-        player.drawPlayer();
+        switch (gameState){
+        case GameState::MainMenu:
+            drawMainMenu();
+            break;
+
+        case GameState::InGame:
+            ClearBackground(BLACK);
+            map.drawMap();
+            player.drawPlayer();
+            break;
+
+        case GameState::Paused:
+            break;
+
+        case GameState::Victory:
+            break;
+
+        case GameState::Defeat:
+            break;
+        }
 
         EndDrawing();
 

@@ -36,18 +36,29 @@ void Map::createMap(){
 }
 
 void Map::drawImageMap(){
+    Color color {};
     for (std::size_t row {0} ; row < Constants::tiles ; ++row){
         for (std::size_t col {0} ; col < Constants::tiles ; ++col){
             switch (m_map[row][col]){
             case 'Z':
-                drawTile(col, row, BROWN);
+                color = BROWN;
                 break;
             case 'S':
             case 'H':
             case 'D':
             case 'X':
-                drawTile(col, row, YELLOW);
+                color = YELLOW;
+                break;
+            default:
+                color = BLANK;
             }
+
+            DrawRectangle(
+                    col * Constants::tileWidth, 
+                    row * Constants::tileHeigth, 
+                    Constants::tileWidth, 
+                    Constants::tileHeigth, 
+                    color);
         }
     }
 }

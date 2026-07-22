@@ -9,6 +9,14 @@
 
 #include "raylib.h"
 
+enum class GameState{
+    MainMenu,
+    InGame,
+    Paused,
+    Victory,
+    Defeat
+};
+
 namespace Constants{
     inline constexpr int FPS {60};
     inline constexpr int tiles {30};
