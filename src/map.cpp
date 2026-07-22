@@ -35,7 +35,7 @@ void Map::createMap(){
     }};
 }
 
-void Map::drawMap(){
+void Map::drawImageMap(){
     for (std::size_t row {0} ; row < Constants::tiles ; ++row){
         for (std::size_t col {0} ; col < Constants::tiles ; ++col){
             switch (m_map[row][col]){
@@ -50,6 +50,26 @@ void Map::drawMap(){
             }
         }
     }
+}
+
+void Map::createImageMap(){
+    m_mapImage = LoadRenderTexture(Constants::windowWidth, Constants::windowHeigth);
+
+    BeginTextureMode(m_mapImage);
+
+    ClearBackground(BLANK);
+    drawImageMap(); 
+    
+    EndTextureMode();
+}
+
+void Map::drawMap(){
+    DrawTextureRec(
+        m_mapImage.texture, 
+        Rectangle{0, 0, (float)m_mapImage.texture.width, (float)-m_mapImage.texture.height}, 
+        Vector2{0, 0}, 
+        WHITE
+    );
 }
 
 void drawTile(int posX, int posY, Color color){

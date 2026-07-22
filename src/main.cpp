@@ -8,6 +8,7 @@ int main() {
 
     Map map {};
     map.createMap();
+    map.createImageMap();
 
     while(!WindowShouldClose()){
         
