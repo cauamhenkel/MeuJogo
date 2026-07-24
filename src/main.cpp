@@ -5,7 +5,7 @@
 
 int main() {
     
-    InitWindow(Constants::windowWidth, Constants::windowHeigth, "Jogao");
+    InitWindow(Constants::windowWidth, Constants::windowHeight, "Jogao");
     SetTargetFPS(Constants::FPS);
 
     Map map {};
@@ -16,6 +16,7 @@ int main() {
     player.placeInMap(map);
 
     GameState gameState {GameState::InGame};
+    MenusSelection menusSelection {};
 
     while(!WindowShouldClose()){
         switch (gameState){

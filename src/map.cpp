@@ -55,9 +55,9 @@ void Map::drawImageMap(){
 
             DrawRectangle(
                     col * Constants::tileWidth, 
-                    row * Constants::tileHeigth, 
+                    row * Constants::tileHeight, 
                     Constants::tileWidth, 
-                    Constants::tileHeigth, 
+                    Constants::tileHeight, 
                     color);
         }
     }
@@ -66,14 +66,14 @@ void Map::drawImageMap(){
 void drawTile(int posX, int posY, Color color){
     DrawRectangle(
         posX * Constants::tileWidth, 
-        posY * Constants::tileHeigth, 
+        posY * Constants::tileHeight, 
         Constants::tileWidth, 
-        Constants::tileHeigth, 
+        Constants::tileHeight, 
         color);
 }
 
 void Map::createImageMap(){
-    m_mapImage = LoadRenderTexture(Constants::windowWidth, Constants::windowHeigth);
+    m_mapImage = LoadRenderTexture(Constants::windowWidth, Constants::windowHeight);
 
     BeginTextureMode(m_mapImage);
 

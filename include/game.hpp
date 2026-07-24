@@ -22,10 +22,10 @@ namespace Constants{
     inline constexpr int tiles {30};
 
     inline constexpr int tileWidth {20};
-    inline constexpr int tileHeigth {20};
+    inline constexpr int tileHeight {20};
 
     inline constexpr int windowWidth {tileWidth * tiles};
-    inline constexpr int windowHeigth {tileHeigth * tiles};
+    inline constexpr int windowHeight {tileHeight * tiles};
 }
 
 #endif

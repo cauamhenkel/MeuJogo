@@ -9,7 +9,7 @@ void Player::placeInMap(const Map& map){
         for (size_t col {0} ; col < Constants::tiles ; ++col){
             if (mapGrid[row][col] == 'P'){
                 m_body.posX = col * Constants::tileWidth;
-                m_body.posY = row * Constants::tileHeigth;
+                m_body.posY = row * Constants::tileHeight;
             }
         }
     }
@@ -20,7 +20,7 @@ void Player::drawPlayer(){
         m_body.posX,
         m_body.posY,
         Constants::tileWidth, 
-        Constants::tileHeigth, 
+        Constants::tileHeight, 
         RED);
 }
 

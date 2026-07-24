@@ -16,7 +16,7 @@ enum class EntityState{
 };
 
 struct Entity{
-    static constexpr float gravity {Constants::tileHeigth / 22};
+    static constexpr float gravity {Constants::tileHeight / 22};
 
     int posX {};
     double velX {};
