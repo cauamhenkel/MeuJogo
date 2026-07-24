@@ -15,13 +15,13 @@ int main() {
     Player player {};
     player.placeInMap(map);
 
-    GameState gameState {GameState::InGame};
-    MenusSelection menusSelection {};
+    GameState gameState {GameState::MainMenu};
+    MenusSelection menusSelections {};
 
     while(!WindowShouldClose()){
         switch (gameState){
         case GameState::MainMenu:
-            mainMenuHandling(gameState);
+            mainMenuHandling(gameState, menusSelections);
             break;
 
         case GameState::InGame:
@@ -42,7 +42,7 @@ int main() {
         
         switch (gameState){
         case GameState::MainMenu:
-            drawMainMenu();
+            drawMainMenu(menusSelections);
             break;
 
         case GameState::InGame:
@@ -62,7 +62,6 @@ int main() {
         }
 
         EndDrawing();
-
     }
     
     CloseWindow();
