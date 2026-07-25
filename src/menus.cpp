@@ -1,6 +1,6 @@
 #include "menus.hpp"
 
-void mainMenuHandling(GameState& gameState, MenusSelection& selection){
+void mainMenuHandling(Player& player, Map& map, GameState& gameState, MenusSelection& selection){
     if (IsKeyPressed(KEY_DOWN)){
         ++(selection.mainMenuSelection);
     }
@@ -12,12 +12,27 @@ void mainMenuHandling(GameState& gameState, MenusSelection& selection){
         case MainMenuSelection::Play:
             if (IsKeyPressed(KEY_ENTER)){
                 gameState = GameState::InGame;
+                
+                map.createMap();
+                map.createImageMap();
+
+                player.placeInMap(map);
+                player.setMaxHealth();
+            }
+            break;
+        case MainMenuSelection::Continue:
+            break;
+        case MainMenuSelection::Exit:
+            if (IsKeyPressed(KEY_ENTER)){
+                selection.exitGame = true;
             }
     }
 }
 
 void drawMainMenu(const MenusSelection& selection){
     ClearBackground(DARKGRAY);
+
+    drawTitle();
 
     drawButtonMainMenu("Play", Formatting::button1PosY, (selection.mainMenuSelection == MainMenuSelection::Play) 
                        ? Formatting::selectedButtonInnerColor : Formatting::buttonInnerColor);
@@ -26,6 +41,15 @@ void drawMainMenu(const MenusSelection& selection){
     drawButtonMainMenu("Exit", Formatting::button3PosY, (selection.mainMenuSelection == MainMenuSelection::Exit) 
                        ? Formatting::selectedButtonInnerColor : Formatting::buttonInnerColor);
 
+}
+
+void drawTitle(){
+    const char* titleLine1 {"El Cowboy"};
+    const char* titleLine2 {"Emiliano 2"};
+    drawTextWithEdge(titleLine1, Formatting::titleFontSize, Formatting::titleTextEdge, 
+                     Constants::tileHeight * 2, Formatting::textColor, Formatting::textEdgeColor);
+    drawTextWithEdge(titleLine2, Formatting::titleFontSize * 1.2, Formatting::titleTextEdge, 
+                     (Constants::tileHeight * 2) + (Formatting::titleFontSize * 1.2), Formatting::textColor, Formatting::textEdgeColor);
 }
 
 void drawButtonMainMenu(const char* text, int posY, Color innerColor){
@@ -41,7 +65,8 @@ void drawButton(const char* text, int fontSize, int posX, int posY, int width, i
 
     DrawRectangle(posX, posY, width, height, innerColor);
 
-    drawTextWithEdge(text, fontSize, Formatting::buttonTextEdge, (posY + (height/2) - (fontSize/2)), PURPLE, BLACK);
+    drawTextWithEdge(text, fontSize, Formatting::buttonTextEdge, (posY + (height/2) - (fontSize/2)), 
+                     Formatting::textColor, Formatting::textEdgeColor);
 }
 
 void drawTextWithEdge(const char* text, int fontSize, int edgeSize, int posY, Color innerColor, Color edgeColor){

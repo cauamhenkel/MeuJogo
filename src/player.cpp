@@ -24,6 +24,10 @@ void Player::drawPlayer(){
         RED);
 }
 
+void Player::setMaxHealth(){
+    m_health = Player::maxHealth;
+}
+
 void Player::updatePositionX(){
     if (((m_body.posX + Constants::tileWidth) < Constants::windowWidth) && IsKeyDown(KEY_D)){
         m_body.movePosX(m_body.velX, Direction::Right);

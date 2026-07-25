@@ -9,19 +9,16 @@ int main() {
     SetTargetFPS(Constants::FPS);
 
     Map map {};
-    map.createMap();
-    map.createImageMap();
 
     Player player {};
-    player.placeInMap(map);
 
     GameState gameState {GameState::MainMenu};
     MenusSelection menusSelections {};
 
-    while(!WindowShouldClose()){
+    while(!WindowShouldClose() && !(menusSelections.exitGame)){
         switch (gameState){
         case GameState::MainMenu:
-            mainMenuHandling(gameState, menusSelections);
+            mainMenuHandling(player, map, gameState, menusSelections);
             break;
 
         case GameState::InGame:

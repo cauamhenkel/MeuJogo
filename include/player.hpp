@@ -6,7 +6,10 @@
 
 class Player{
 private:
-    Entity m_body;
+    static constexpr int maxHealth {3};
+
+    Entity m_body {};
+    int m_health {maxHealth};
 
 public:
     Player() {
@@ -16,6 +19,7 @@ public:
     void placeInMap(const Map& map);
     void drawPlayer();
 
+    void setMaxHealth();
     void updatePositionX();
 };
 
