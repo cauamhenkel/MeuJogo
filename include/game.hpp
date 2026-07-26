@@ -28,4 +28,13 @@ namespace Constants{
     inline constexpr int windowHeight {tileHeight * tiles};
 }
 
+namespace Elements{
+    inline constexpr char ground {'Z'};
+    inline constexpr char climb {'S'};
+    inline constexpr char stair {'H'};
+    inline constexpr char descent {'Z'};
+    inline constexpr char platform {'X'};
+    inline constexpr char crystal {'F'};
+}
+
 #endif

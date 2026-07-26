@@ -26,7 +26,7 @@ int main() {
                 gameState = GameState::Paused;
                 menusSelections.pauseSelection = PauseSelection::Continue;
             }
-            updatePlayer(player);
+            player.updatePlayer(map);
             break;
 
         case GameState::Paused:
@@ -71,3 +71,5 @@ int main() {
 
     return 0;
 }
+
+// camera e mapa dinamico

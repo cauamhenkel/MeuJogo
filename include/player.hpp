@@ -16,11 +16,19 @@ public:
         m_body.velX = Constants::tileWidth / 5;
     }
 
-    void placeInMap(const Map& map);
-    void drawPlayer();
+    void updatePlayer(Map& map);
 
+    void placeInMap(const Map& map);
     void setMaxHealth();
+
+    bool onElement(Map& map, const char element);
+    bool onStairs(Map& map);
+
+    void centralizePlayerOnStairs(Map& map);
+
     void updatePositionX();
+
+    void drawPlayer();
 };
 
 void updatePlayer(Player& player);
