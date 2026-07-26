@@ -22,10 +22,15 @@ int main() {
             break;
 
         case GameState::InGame:
+            if (IsKeyPressed(KEY_TAB)){
+                gameState = GameState::Paused;
+                menusSelections.pauseSelection = PauseSelection::Continue;
+            }
             updatePlayer(player);
             break;
 
         case GameState::Paused:
+            pausedMenuHandling(gameState, menusSelections);
             break;
 
         case GameState::Victory:
@@ -49,6 +54,7 @@ int main() {
             break;
 
         case GameState::Paused:
+            drawPausedMenu(menusSelections);
             break;
 
         case GameState::Victory:

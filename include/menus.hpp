@@ -43,11 +43,14 @@ struct MenusSelection{
 };
 
 void mainMenuHandling(Player& player, Map& map, GameState& gameState, MenusSelection& selection);
+void pausedMenuHandling(GameState& gameState, MenusSelection& selection);
+
+void drawMainMenu(const MenusSelection& selection);
+void drawPausedMenu(const MenusSelection& selection);
 
 void drawTitle();
 
-void drawMainMenu(const MenusSelection& selection);
-void drawButtonMainMenu(const char* text, int posY, Color innerColor);
+void drawButtonMenu(const char* text, int posY, Color innerColor);
 void drawButton(const char* text, int fontSize, int posX, int posY, int width, int height, 
                 Color innerColor, Color edgeColor);
 
@@ -55,3 +58,5 @@ void drawTextWithEdge(const char* text, int fontSize, int edgeSize, int posY, Co
 
 MainMenuSelection operator++(MainMenuSelection& selection);
 MainMenuSelection operator--(MainMenuSelection& selection);
+PauseSelection operator++(PauseSelection& selection);
+PauseSelection operator--(PauseSelection& selection);
