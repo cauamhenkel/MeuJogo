@@ -12,6 +12,9 @@ void Player::updatePlayer(Map& map){
         updatePositionX();
     }
     
+    if (m_body.state == EntityState::InStairs){
+        processPlayerOnStairs();
+    }
 }
 
 void Player::placeInMap(const Map& map){
@@ -71,6 +74,10 @@ void Player::centralizePlayerOnStairs(Map& map){
         m_body.posX -= (m_body.posX % Constants::tileWidth);
         m_body.posX += Constants::tileWidth;
     }
+}
+
+void Player::processPlayerOnStairs(){
+
 }
 
 void Player::updatePositionX(){

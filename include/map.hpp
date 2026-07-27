@@ -9,6 +9,7 @@ using MapGrid = Array2d<char, Constants::tiles, Constants::tiles>;
 
 class Map{
 private:
+    int m_horizontalTiles {};
     MapGrid m_map {};
     RenderTexture2D m_mapImage {};
 

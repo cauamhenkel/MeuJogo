@@ -8,6 +8,8 @@ class Player{
 private:
     static constexpr int maxHealth {3};
 
+    static constexpr double velOnStairs {Constants::tileHeight/5};
+
     Entity m_body {};
     int m_health {maxHealth};
 
@@ -28,9 +30,9 @@ public:
 
     void updatePositionX();
 
+    void processPlayerOnStairs();
+
     void drawPlayer();
 };
-
-void updatePlayer(Player& player);
 
 #endif

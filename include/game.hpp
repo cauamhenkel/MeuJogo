@@ -29,6 +29,7 @@ namespace Constants{
 }
 
 namespace Elements{
+    inline constexpr char air {' '};
     inline constexpr char ground {'Z'};
     inline constexpr char climb {'S'};
     inline constexpr char stair {'H'};
