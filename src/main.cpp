@@ -1,75 +1,21 @@
 #include "game.hpp"
-#include "map.hpp"
-#include "player.hpp"
-#include "menus.hpp"
 
 int main() {
-    
+    Game game {};
+
     InitWindow(Constants::windowWidth, Constants::windowHeight, "Jogao");
     SetTargetFPS(Constants::FPS);
+    HideCursor();
 
-    Map map {};
+    initializeCamera(game.camera);
 
-    Player player {};
-
-    GameState gameState {GameState::MainMenu};
-    MenusSelection menusSelections {};
-
-    while(!WindowShouldClose() && !(menusSelections.exitGame)){
-        switch (gameState){
-        case GameState::MainMenu:
-            mainMenuHandling(player, map, gameState, menusSelections);
-            break;
-
-        case GameState::InGame:
-            if (IsKeyPressed(KEY_TAB)){
-                gameState = GameState::Paused;
-                menusSelections.pauseSelection = PauseSelection::Continue;
-            }
-            player.updatePlayer(map);
-            break;
-
-        case GameState::Paused:
-            pausedMenuHandling(gameState, menusSelections);
-            break;
-
-        case GameState::Victory:
-            break;
-
-        case GameState::Defeat:
-            break;
-        }
-
-        BeginDrawing();
+    while(!WindowShouldClose() && !(game.menusSelections.exitGame)){
+        processGame(game);
         
-        switch (gameState){
-        case GameState::MainMenu:
-            drawMainMenu(menusSelections);
-            break;
-
-        case GameState::InGame:
-            ClearBackground(BLACK);
-            map.drawMap();
-            player.drawPlayer();
-            break;
-
-        case GameState::Paused:
-            drawPausedMenu(menusSelections);
-            break;
-
-        case GameState::Victory:
-            break;
-
-        case GameState::Defeat:
-            break;
-        }
-
-        EndDrawing();
+        drawGame(game);
     }
     
     CloseWindow();
-
+    
     return 0;
 }
-
-// camera e mapa dinamico

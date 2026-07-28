@@ -1,7 +1,7 @@
 #ifndef ENTITY_H
 #define ENTITY_H
 
-#include "game.hpp"
+#include "common.hpp"
 #include "map.hpp"
 
 enum class Direction{
@@ -16,7 +16,7 @@ enum class EntityState{
 };
 
 struct Entity{
-    static constexpr float gravity {Constants::tileHeight / 22};
+    static constexpr float gravity {Constants::tileHeight / 22.0};
 
     int posX {};
     double velX {};

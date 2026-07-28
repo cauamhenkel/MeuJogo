@@ -1,15 +1,16 @@
 #ifndef MAP_H
 #define MAP_H
 
-#include "game.hpp"
+#include "common.hpp"
 
-template <typename T, std::size_t Row, std::size_t Col>
-using Array2d = std::array<std::array<T, Col>, Row>;
-using MapGrid = Array2d<char, Constants::tiles, Constants::tiles>;
+template<typename T>
+using vector2d = std::vector<std::vector<T>>;
+using MapGrid = vector2d<char>;
 
 class Map{
 private:
     int m_horizontalTiles {};
+    int m_verticalTiles {};
     MapGrid m_map {};
     RenderTexture2D m_mapImage {};
 
@@ -29,6 +30,8 @@ public:
     void drawMap();
 
     const MapGrid& getTiles() const;
+    const int getHorizontalTiles() const;
+    const int getVerticalTiles() const;
 };
 
 void drawTile(int posX, int posY, Color color);

@@ -1,8 +1,9 @@
 #ifndef PLAYER_H
 #define PLAYER_H
 
-#include "game.hpp"
-#include "entity.hpp" // includes map.hpp
+#include "common.hpp"
+#include "entity.hpp" 
+#include "map.hpp"
 
 class Player{
 private:
@@ -20,7 +21,13 @@ public:
 
     void updatePlayer(Map& map);
 
+    void processPlayerOnStairs();
+
+    Vector2 getPosition();
+
     void placeInMap(const Map& map);
+
+    void resetPlayer();
     void setMaxHealth();
 
     bool onElement(Map& map, const char element);
@@ -28,9 +35,7 @@ public:
 
     void centralizePlayerOnStairs(Map& map);
 
-    void updatePositionX();
-
-    void processPlayerOnStairs();
+    void updatePositionX(Map& map);
 
     void drawPlayer();
 };

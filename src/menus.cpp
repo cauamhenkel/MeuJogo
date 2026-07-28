@@ -1,56 +1,56 @@
 #include "menus.hpp"
 
-void mainMenuHandling(Player& player, Map& map, GameState& gameState, MenusSelection& selection){
+void mainMenuHandling(Game& game){
     if (IsKeyPressed(KEY_DOWN)){
-        ++(selection.mainMenuSelection);
+        ++(game.menusSelections.mainMenuSelection);
     }
     if (IsKeyPressed(KEY_UP)){
-        --(selection.mainMenuSelection);
+        --(game.menusSelections.mainMenuSelection);
     }
 
-    switch(selection.mainMenuSelection){
+    switch(game.menusSelections.mainMenuSelection){
         case MainMenuSelection::Play:
             if (IsKeyPressed(KEY_ENTER)){
-                gameState = GameState::InGame;
+                game.gameState = GameState::InGame;
                 
-                map.createMap();
-                map.createImageMap();
+                game.map.createMap();
+                game.map.createImageMap();
 
-                player.placeInMap(map);
-                player.setMaxHealth();
+                game.player.placeInMap(game.map);
+                game.player.resetPlayer();
             }
             break;
         case MainMenuSelection::Continue:
             break;
         case MainMenuSelection::Exit:
             if (IsKeyPressed(KEY_ENTER)){
-                selection.exitGame = true;
+                game.menusSelections.exitGame = true;
             }
     }
 }
 
-void pausedMenuHandling(GameState& gameState, MenusSelection& selection){
+void pausedMenuHandling(Game& game){
     if (IsKeyPressed(KEY_DOWN)){
-        ++(selection.pauseSelection);
+        ++(game.menusSelections.pauseSelection);
     }
     if (IsKeyPressed(KEY_UP)){
-        --(selection.pauseSelection);
+        --(game.menusSelections.pauseSelection);
     }
 
-    switch(selection.pauseSelection){
+    switch(game.menusSelections.pauseSelection){
         case PauseSelection::Continue:
             if (IsKeyPressed(KEY_ENTER)){
-                gameState = GameState::InGame;
+                game.gameState = GameState::InGame;
             }
             break;
         case PauseSelection::MainMenu:
             if (IsKeyPressed(KEY_ENTER)){
-                gameState = GameState::MainMenu;
+                game.gameState = GameState::MainMenu;
             }
             break;
         case PauseSelection::Exit:
             if (IsKeyPressed(KEY_ENTER)){
-                selection.exitGame = true;
+                game.menusSelections.exitGame = true;
             }
     }
 }
@@ -74,6 +74,9 @@ void drawMainMenu(const MenusSelection& selection){
 
 void drawPausedMenu(const MenusSelection& selection){
     ClearBackground(DARKGRAY);
+
+    drawTextWithEdge("Game Paused", Formatting::titleFontSize, Formatting::titleTextEdge, 
+                     Constants::tileHeight * 2, Formatting::textColor, Formatting::textEdgeColor);
 
     const char* button1Text {"Continue"};
     const char* button2Text {"Main menu"};

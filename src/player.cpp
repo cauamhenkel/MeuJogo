@@ -9,25 +9,42 @@ void Player::updatePlayer(Map& map){
     }
     
     if (m_body.state == EntityState::InGround || m_body.state == EntityState::InAir){
-        updatePositionX();
+        updatePositionX(map);
     }
     
     if (m_body.state == EntityState::InStairs){
         processPlayerOnStairs();
+
     }
+}
+
+void Player::processPlayerOnStairs(){
+
+}
+
+Vector2 Player::getPosition(){
+    return Vector2 {static_cast<float>(m_body.posX) + (Constants::tileWidth / 2.0f), 
+                    static_cast<float>(m_body.posY) + (Constants::tileHeight / 2.0f)};
 }
 
 void Player::placeInMap(const Map& map){
     const MapGrid& mapGrid = map.getTiles();
+    const int horizontalTiles {map.getHorizontalTiles()};
+    const int verticalTiles {map.getVerticalTiles()};
 
-    for (size_t row {0} ; row < Constants::tiles ; ++row){
-        for (size_t col {0} ; col < Constants::tiles ; ++col){
+    for (size_t row {0} ; row < static_cast<size_t>(verticalTiles) ; ++row){
+        for (size_t col {0} ; col < static_cast<size_t>(horizontalTiles) ; ++col){
             if (mapGrid[row][col] == 'P'){
                 m_body.posX = col * Constants::tileWidth;
                 m_body.posY = row * Constants::tileHeight;
             }
         }
     }
+}
+
+void Player::resetPlayer(){
+    m_body.state = EntityState::InGround;
+    setMaxHealth();
 }
 
 void Player::setMaxHealth(){
@@ -76,12 +93,10 @@ void Player::centralizePlayerOnStairs(Map& map){
     }
 }
 
-void Player::processPlayerOnStairs(){
+void Player::updatePositionX(Map& map){
+    int mapWidthPixels = map.getHorizontalTiles() * Constants::tileWidth;
 
-}
-
-void Player::updatePositionX(){
-    if (((m_body.posX + Constants::tileWidth) < Constants::windowWidth) && IsKeyDown(KEY_D)){
+    if (((m_body.posX + Constants::tileWidth) < mapWidthPixels) && IsKeyDown(KEY_D)){
         m_body.movePosX(m_body.velX, Direction::Right);
     }
     if ((m_body.posX) > 0 && IsKeyDown(KEY_A)){

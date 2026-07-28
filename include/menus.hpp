@@ -1,14 +1,13 @@
-#include "game.hpp"
-#include "player.hpp"
-#include "map.hpp"
+#include "common.hpp"
+#include "objects.hpp"
 
 namespace Formatting{
     inline constexpr int titleFontSize {Constants::tileHeight * 3};
     inline constexpr int titleTextEdge {static_cast<int>(Constants::tileWidth * 0.2)};
 
-    inline constexpr int buttonWidth {Constants::tileWidth * 8};
+    inline constexpr int buttonWidth {Constants::tileWidth * 9};
     inline constexpr int buttonHeight {Constants::tileHeight * 3};
-    inline constexpr int buttonFontSize {static_cast<int>(Constants::tileHeight * 1.5)};
+    inline constexpr int buttonFontSize {static_cast<int>(Constants::tileHeight * 1.6)};
     inline constexpr int buttonTextEdge {static_cast<int>(Constants::tileWidth * 0.1)};
 
     inline constexpr Color buttonInnerColor {GRAY};
@@ -20,30 +19,12 @@ namespace Formatting{
 
     inline constexpr int buttonPosX {(Constants::windowWidth/2) - (buttonWidth/2)};
     inline constexpr int button1PosY {Constants::tileHeight * 12};
-    inline constexpr int button2PosY {button1PosY + Constants::tileHeight * 5};
-    inline constexpr int button3PosY {button2PosY + Constants::tileHeight * 5};
+    inline constexpr int button2PosY {button1PosY + Constants::tileHeight * 4};
+    inline constexpr int button3PosY {button2PosY + Constants::tileHeight * 4};
 }
 
-enum class MainMenuSelection{
-    Play,
-    Continue,
-    Exit
-};
-
-enum class PauseSelection{
-    Continue,
-    MainMenu,
-    Exit
-};
-
-struct MenusSelection{
-    MainMenuSelection mainMenuSelection {MainMenuSelection::Play};
-    PauseSelection pauseSelection {PauseSelection::Continue};
-    bool exitGame {false};
-};
-
-void mainMenuHandling(Player& player, Map& map, GameState& gameState, MenusSelection& selection);
-void pausedMenuHandling(GameState& gameState, MenusSelection& selection);
+void mainMenuHandling(Game& game);
+void pausedMenuHandling(Game& game);
 
 void drawMainMenu(const MenusSelection& selection);
 void drawPausedMenu(const MenusSelection& selection);
