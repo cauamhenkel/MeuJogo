@@ -16,31 +16,32 @@ private:
 
     Entity m_body {};
     int m_health {maxHealth};
+    bool m_enteredLevel {};
 
 public:
     Player() {
         m_body.velX = Constants::tileWidth / 5;
     }
+    void placeInMap(const Map& map);
+    void resetPlayer();
+    void setMaxHealth();
+    void setEnteredLevel(bool entered);
 
     void updatePlayer(const Map& map);
 
+    void updatePositionX(const Map& map);
+
     void processPlayerOnStairs(const Map& map);
-
-    Vector2 getPosition();
-
-    void placeInMap(const Map& map);
-
-    void resetPlayer();
-    void setMaxHealth();
+    void centralizePlayerOnStairs(const Map& map);
 
     bool onElement(const Map& map, const char element);
     bool onStairs(const Map& map);
+    bool onPlatform(const Map& map);
     bool elementAbove(const Map& map, const char element);
     bool elementBelow(const Map& map, const char element);
 
-    void centralizePlayerOnStairs(const Map& map);
-
-    void updatePositionX(const Map& map);
+    bool hasEnteredLevel();
+    Vector2 getPosition();
 
     void drawPlayer();
 };

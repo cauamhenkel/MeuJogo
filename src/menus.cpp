@@ -12,12 +12,8 @@ void mainMenuHandling(Game& game){
         case MainMenuSelection::Play:
             if (IsKeyPressed(KEY_ENTER)){
                 game.gameState = GameState::InGame;
-                
-                game.map.createMap();
-                game.map.createImageMap();
-
-                game.player.placeInMap(game.map);
-                game.player.resetPlayer();
+                game.player.setMaxHealth();
+                game.player.setEnteredLevel(true);
             }
             break;
         case MainMenuSelection::Continue:

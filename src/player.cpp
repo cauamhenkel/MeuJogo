@@ -2,38 +2,6 @@
 
 /* Class functions */
 
-void Player::updatePlayer(const Map& map){
-    if ((IsKeyPressed(KEY_W) || IsKeyPressed(KEY_S)) && onStairs(map)){
-        m_body.state = EntityState::InStairs;
-        centralizePlayerOnStairs(map);
-    }
-    
-    if (m_body.state == EntityState::InGround || m_body.state == EntityState::InAir){
-        updatePositionX(map);
-    }
-    
-    if (m_body.state == EntityState::InStairs){
-        processPlayerOnStairs(map);
-    }
-}
-
-void Player::processPlayerOnStairs(const Map& map){
-    if (IsKeyPressed(KEY_D) || IsKeyPressed(KEY_A)){
-        m_body.state = EntityState::InAir;
-    }
-    if (IsKeyDown(KEY_W) && (elementAbove(map, Elements::stair) || elementAbove(map, Elements::platform))){
-        m_body.posY -= Player::velOnStairs;
-    }
-    if (IsKeyDown(KEY_S) && (elementBelow(map, Elements::stair) || elementBelow(map, Elements::platform))){
-        m_body.posY += Player::velOnStairs;
-    }
-}
-
-Vector2 Player::getPosition(){
-    return Vector2 {static_cast<float>(m_body.posX) + (Player::playerWidth / 2.0f), 
-                    static_cast<float>(m_body.posY) + (Player::playerHeight / 2.0f)};
-}
-
 void Player::placeInMap(const Map& map){
     const MapGrid& mapGrid = map.getTiles();
     const int horizontalTiles {map.getHorizontalTiles()};
@@ -51,11 +19,73 @@ void Player::placeInMap(const Map& map){
 
 void Player::resetPlayer(){
     m_body.state = EntityState::InGround;
-    setMaxHealth();
 }
 
 void Player::setMaxHealth(){
     m_health = Player::maxHealth;
+}
+
+void Player::setEnteredLevel(bool entered){
+    m_enteredLevel = entered;
+}
+
+void Player::updatePlayer(const Map& map){
+    if ((IsKeyPressed(KEY_W) || IsKeyPressed(KEY_S)) && (onStairs(map) || onPlatform(map))){
+        m_body.state = EntityState::InStairs;
+        centralizePlayerOnStairs(map);
+    }
+    
+    if (m_body.state == EntityState::InGround || m_body.state == EntityState::InAir){
+        updatePositionX(map);
+    }
+    
+    if (m_body.state == EntityState::InStairs){
+        processPlayerOnStairs(map);
+    }
+}
+
+void Player::updatePositionX(const Map& map){
+    int mapWidthPixels = map.getHorizontalTiles() * Constants::tileWidth;
+
+    if (((m_body.posX + Constants::tileWidth) < mapWidthPixels) && IsKeyDown(KEY_D)){
+        m_body.movePosX(m_body.velX, Direction::Right);
+    }
+    if ((m_body.posX) > 0 && IsKeyDown(KEY_A)){
+        m_body.movePosX(m_body.velX, Direction::Left);
+    }
+}
+
+void Player::processPlayerOnStairs(const Map& map){
+    if (IsKeyPressed(KEY_D) || IsKeyPressed(KEY_A)){
+        m_body.state = EntityState::InAir;
+    }
+    if (IsKeyDown(KEY_W) && (elementAbove(map, Elements::stair) || elementAbove(map, Elements::platform))){
+        m_body.posY -= Player::velOnStairs;
+    }
+    if (IsKeyDown(KEY_S) && (elementBelow(map, Elements::stair) || elementBelow(map, Elements::platform))){
+        m_body.posY += Player::velOnStairs;
+    }
+}
+
+void Player::centralizePlayerOnStairs(const Map& map){
+    // Test only on the left side
+    int posXLeftGrid {(m_body.posX) / Constants::tileWidth};
+    int posYGridHead {(m_body.posY) / Constants::tileHeight};
+    int posYGridFeet {(m_body.posY + Player::playerHeight - 1) / Constants::tileWidth};
+
+    char farLeftHead {map.tileAt(posYGridHead, posXLeftGrid)};
+    char farLeftFeet {map.tileAt(posYGridFeet, posXLeftGrid)};
+
+    bool touchingStairFarLeft {farLeftHead == Elements::stair || farLeftHead == Elements::platform
+                            || farLeftFeet == Elements::stair || farLeftFeet == Elements::platform};
+    if (touchingStairFarLeft){
+        m_body.posX -= (m_body.posX % Constants::tileWidth);
+    }
+    // if isn't in the left side, the player must be colliding with his right side
+    else{
+        m_body.posX -= (m_body.posX % Constants::tileWidth);
+        m_body.posX += Constants::tileWidth;
+    }
 }
 
 bool Player::onElement(const Map& map, const char element){
@@ -77,6 +107,10 @@ bool Player::onElement(const Map& map, const char element){
 
 bool Player::onStairs(const Map& map){
     return (onElement(map, Elements::stair));
+}
+
+bool Player::onPlatform(const Map& map){
+    return (onElement(map, Elements::platform));
 }
 
 bool Player::elementAbove(const Map& map, const char element){
@@ -107,33 +141,13 @@ bool Player::elementBelow(const Map& map, const char element){
     return false;
 }
 
-void Player::centralizePlayerOnStairs(const Map& map){
-    int posXLeftGrid {(m_body.posX) / Constants::tileWidth};
-    int posXRightGrid {(m_body.posX + Player::playerWidth - 1) / Constants::tileWidth};
-    int posYGrid {(m_body.posY) / Constants::tileHeight};
-
-    const MapGrid& grid {map.getTiles()};
-
-    char farLeft {grid[posYGrid][posXLeftGrid]};
-
-    if ((farLeft == Elements::stair)){
-        m_body.posX -= (m_body.posX % Constants::tileWidth);
-    }
-    else{
-        m_body.posX -= (m_body.posX % Constants::tileWidth);
-        m_body.posX += Constants::tileWidth;
-    }
+bool Player::hasEnteredLevel(){
+    return m_enteredLevel;
 }
 
-void Player::updatePositionX(const Map& map){
-    int mapWidthPixels = map.getHorizontalTiles() * Constants::tileWidth;
-
-    if (((m_body.posX + Constants::tileWidth) < mapWidthPixels) && IsKeyDown(KEY_D)){
-        m_body.movePosX(m_body.velX, Direction::Right);
-    }
-    if ((m_body.posX) > 0 && IsKeyDown(KEY_A)){
-        m_body.movePosX(m_body.velX, Direction::Left);
-    }
+Vector2 Player::getPosition(){
+    return Vector2 {static_cast<float>(m_body.posX) + (Player::playerWidth / 2.0f), 
+                    static_cast<float>(m_body.posY) + (Player::playerHeight / 2.0f)};
 }
 
 void Player::drawPlayer(){

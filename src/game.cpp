@@ -1,7 +1,7 @@
 #include "game.hpp"
 
 void initializeCamera(Camera2D& camera){
-    camera.offset = Vector2{static_cast<float>(Constants::windowWidth/2), static_cast<float>(Constants::windowHeight/2)};
+    camera.offset = Vector2{static_cast<float>(Constants::windowWidth/2.0f), static_cast<float>(Constants::windowHeight/2.0f)};
     camera.rotation = 0.0f;
     camera.zoom = 1.0f; 
 }
@@ -13,8 +13,8 @@ void getCameraPosition(Game& game){
     int mapHeightPixels {game.map.getVerticalTiles() * Constants::tileHeight};
 
     // 2. Tamanho visível da tela no mundo (considerando o zoom)
-    float halfScreenWidth  = static_cast<float>(Constants::windowWidth/2) / game.camera.zoom;
-    float halfScreenHeight = static_cast<float>(Constants::windowHeight/2) / game.camera.zoom;
+    float halfScreenWidth  = static_cast<float>(Constants::windowWidth/2.0f) / game.camera.zoom;
+    float halfScreenHeight = static_cast<float>(Constants::windowHeight/2.0f) / game.camera.zoom;
 
     // 3. Aplica os limites (Clamp) para a câmera não sair do mapa
     
@@ -47,10 +47,22 @@ void processGame(Game& game){
             break;
 
         case GameState::InGame:
-            if (playerWon(game.map)){
-                game.gameState = GameState::Victory;
+            // Runs only one time, rigth after entering the level
+            if (game.player.hasEnteredLevel()){
+                if (playerWon(game.map)){
+                    game.gameState = GameState::Victory;
+                }
+                else{
+                    game.map.createMap();
+                    game.map.createImageMap();
+
+                    game.player.placeInMap(game.map);
+                    game.player.resetPlayer();
+                }
+
+                game.player.setEnteredLevel(false);
             }
-            else{
+            if(game.gameState == GameState::InGame){
                 if (IsKeyPressed(KEY_TAB)){
                     game.gameState = GameState::Paused;
                     game.menusSelections.pauseSelection = PauseSelection::Continue;

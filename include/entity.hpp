@@ -27,6 +27,8 @@ struct Entity{
     Direction direction {Direction::Right};
     EntityState state {EntityState::InGround};
 
+    void updatePosX();
+    void updatePosY();
     void movePosX(int moveX, Direction direction);
 };
 
