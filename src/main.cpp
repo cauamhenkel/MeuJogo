@@ -19,3 +19,14 @@ int main() {
     
     return 0;
 }
+
+/*
+Coisas pra fazer:
+
+adicionar teste se chegou no F e passar de fase
+- incrementar level
+- criar novo mapa (com novo level de referencia)
+
+arrumar bug bizarro nas escadas
+
+*/

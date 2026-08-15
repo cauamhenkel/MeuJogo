@@ -29,10 +29,10 @@ void getCameraPosition(Game& game){
     targetPos.y = std::clamp(targetPos.y, minY, maxY);
 
     // 4. Se o mapa for MENOR que a própria tela, trava no centro do mapa
-    if (mapWidthPixels < GetScreenWidth()) {
+    if (mapWidthPixels < (2 * halfScreenWidth)) {
         targetPos.x = mapWidthPixels / 2.0f;
     }
-    if (mapHeightPixels < GetScreenHeight()) {
+    if (mapHeightPixels < (2 * halfScreenHeight)) {
         targetPos.y = mapHeightPixels / 2.0f;
     }
 
@@ -47,13 +47,18 @@ void processGame(Game& game){
             break;
 
         case GameState::InGame:
-            if (IsKeyPressed(KEY_TAB)){
-                game.gameState = GameState::Paused;
-                game.menusSelections.pauseSelection = PauseSelection::Continue;
+            if (playerWon(game.map)){
+                game.gameState = GameState::Victory;
             }
-            game.player.updatePlayer(game.map);
+            else{
+                if (IsKeyPressed(KEY_TAB)){
+                    game.gameState = GameState::Paused;
+                    game.menusSelections.pauseSelection = PauseSelection::Continue;
+                }
+                game.player.updatePlayer(game.map);
 
-            getCameraPosition(game);
+                getCameraPosition(game);
+            }
             break;
 
         case GameState::Paused:
@@ -98,4 +103,21 @@ void drawGame(Game& game){
         }
 
     EndDrawing();
+}
+
+bool playerWon(const Map& map){
+    std::string LevelConfigName {std::format("../assets/levels/config/map_{}_config.txt", map.getLevel())};
+    std::ifstream successOpenLevelConfig {LevelConfigName};
+
+    std::string LevelDesignName {std::format("../assets/levels/design/map_{}.txt", map.getLevel())};
+    std::ifstream successOpenLevelDesign {LevelDesignName};
+
+    // if the player plays all the levels and enter the last crystal, 
+    // the level will become a number that does not exist in the existing files, granting the victory
+    if (!successOpenLevelConfig || !successOpenLevelDesign){
+        return true;
+    }
+    else{
+        return false;
+    }
 }

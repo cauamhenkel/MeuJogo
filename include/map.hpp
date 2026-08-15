@@ -9,6 +9,7 @@ using MapGrid = vector2d<char>;
 
 class Map{
 private:
+    int m_level {};
     int m_horizontalTiles {};
     int m_verticalTiles {};
     MapGrid m_map {};
@@ -29,7 +30,9 @@ public:
     // draw the map
     void drawMap();
 
+    const int getLevel() const;
     const MapGrid& getTiles() const;
+    const char tileAt(int row, int col) const;
     const int getHorizontalTiles() const;
     const int getVerticalTiles() const;
 };

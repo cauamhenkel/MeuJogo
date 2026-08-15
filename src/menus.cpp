@@ -76,7 +76,7 @@ void drawPausedMenu(const MenusSelection& selection){
     ClearBackground(DARKGRAY);
 
     drawTextWithEdge("Game Paused", Formatting::titleFontSize, Formatting::titleTextEdge, 
-                     Constants::tileHeight * 2, Formatting::textColor, Formatting::textEdgeColor);
+                     Constants::tileHeight * 3, Formatting::textColor, Formatting::textEdgeColor);
 
     const char* button1Text {"Continue"};
     const char* button2Text {"Main menu"};

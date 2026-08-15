@@ -10,4 +10,6 @@ void getCameraPosition(Game& game);
 void processGame(Game& game);
 void drawGame(Game& game);
 
+bool playerWon(const Map& map);
+
 #endif

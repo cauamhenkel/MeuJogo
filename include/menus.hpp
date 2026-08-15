@@ -5,9 +5,9 @@ namespace Formatting{
     inline constexpr int titleFontSize {Constants::tileHeight * 3};
     inline constexpr int titleTextEdge {static_cast<int>(Constants::tileWidth * 0.2)};
 
-    inline constexpr int buttonWidth {Constants::tileWidth * 9};
-    inline constexpr int buttonHeight {Constants::tileHeight * 3};
-    inline constexpr int buttonFontSize {static_cast<int>(Constants::tileHeight * 1.6)};
+    inline constexpr int buttonWidth {static_cast<int>(Constants::tileWidth * 7)};
+    inline constexpr int buttonHeight {static_cast<int>(Constants::tileHeight * 2.5)};
+    inline constexpr int buttonFontSize {static_cast<int>(Constants::tileHeight * 1.3)};
     inline constexpr int buttonTextEdge {static_cast<int>(Constants::tileWidth * 0.1)};
 
     inline constexpr Color buttonInnerColor {GRAY};

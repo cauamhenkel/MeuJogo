@@ -7,6 +7,9 @@
 
 class Player{
 private:
+    static constexpr int playerHeight {Constants::tileHeight};
+    static constexpr int playerWidth {Constants::tileWidth};
+
     static constexpr int maxHealth {3};
 
     static constexpr double velOnStairs {Constants::tileHeight/5};
@@ -19,9 +22,9 @@ public:
         m_body.velX = Constants::tileWidth / 5;
     }
 
-    void updatePlayer(Map& map);
+    void updatePlayer(const Map& map);
 
-    void processPlayerOnStairs();
+    void processPlayerOnStairs(const Map& map);
 
     Vector2 getPosition();
 
@@ -30,12 +33,14 @@ public:
     void resetPlayer();
     void setMaxHealth();
 
-    bool onElement(Map& map, const char element);
-    bool onStairs(Map& map);
+    bool onElement(const Map& map, const char element);
+    bool onStairs(const Map& map);
+    bool elementAbove(const Map& map, const char element);
+    bool elementBelow(const Map& map, const char element);
 
-    void centralizePlayerOnStairs(Map& map);
+    void centralizePlayerOnStairs(const Map& map);
 
-    void updatePositionX(Map& map);
+    void updatePositionX(const Map& map);
 
     void drawPlayer();
 };

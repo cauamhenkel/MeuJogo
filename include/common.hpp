@@ -3,6 +3,8 @@
 
 #include <algorithm>
 #include <array>
+#include <format>
+#include <fstream>
 #include <string>
 #include <string_view>
 #include <iostream>
@@ -51,9 +53,7 @@ namespace Constants{
 namespace Elements{
     inline constexpr char air {' '};
     inline constexpr char ground {'Z'};
-    inline constexpr char climb {'S'};
     inline constexpr char stair {'H'};
-    inline constexpr char descent {'Z'};
     inline constexpr char platform {'X'};
     inline constexpr char crystal {'F'};
 }
