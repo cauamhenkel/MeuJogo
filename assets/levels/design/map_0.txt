@@ -2,29 +2,29 @@
                               
                               
                               
-      E       F      D       E
-     ZZZZZZZZZZZZZZZZZZZZZZZZZ
+      E       F      H       E
+     ZZZZZZZZZZZZZZZZXZZZZZZZZ
                      H        
                      H        
                      H        
                      H        
                      H        
-             D       S        
-       ZZZZZZZZZZZZZZZZZZZZZZZ
+             H       H        
+       ZZZZZZXZZZZZZZZZZZZZZZZ
              H                
              H                
              H                
              H                
-             S E D            
-          ZZZZZZZZZZZ         
+             H E H            
+          ZZZZZZZXZZZ         
                  H            
                  H            
                  H            
-        D        S        D   
-       ZZZZZZZZZZZZZZZZZZZZZZZ
+        H        H        H   
+       ZXZZZZZZZZZZZZZZZZZXZZZ
         H                 H   
         H                 H   
         H                 H   
         H                 H   
- E      S     P           S   
+ E      H     P           H   
 ZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZ

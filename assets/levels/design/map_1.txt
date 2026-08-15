@@ -1,30 +1,30 @@
                               
-   D  E                       
-  ZZZZZZZZ    F    D          
-   H      ZZZZZZZZZZZ    E    
+   H  E                       
+  ZXZZZZZZ    F    H          
+   H      ZZZZZZZZZXZ    E    
    H               H ZZZZZZZ  
    H               H          
    H               H          
    H               H          
    H               H          
-   H         D  E  S     D    
-   H        ZZZZZZZZZZZZZZZ   
+   H         H  E  H     H    
+   H        ZXZZZZZZZZZZZXZ   
    H         H  Z      Z H    
    H         H  Z      Z H    
-  ES         H  Z      Z S D  
- ZZZZZ    ZZZXZZZ      ZZZZZ  
+  EH         H  Z      Z H H  
+ ZZZZZ    ZZZXZZZ      ZZZZX  
              H             H  
              H             H  
-         D   S         E   H  
-       ZZZZZZZ       ZZZZZZXZ 
+         H   H         E   H  
+       ZZXZZZZ       ZZZZZZXZ 
          H                 H  
          H                 H  
-         H               D S  
-    D  E S             ZZZZZZZ
- ZZZZZZZZZZZZ            H    
+         H               H H  
+    H  E H             ZZXZZZZ
+ ZZZXZZZZZZZZ            H    
     H                    H    
     H                    H    
     H                    H    
- E  S                    S  E 
+ E  H                    H  E 
 ZZZZZZZZZ     P      ZZZZZZZZZ
          ZZZZZZZZZZZZ         
