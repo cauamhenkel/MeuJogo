@@ -27,7 +27,7 @@ public:
     void setMaxHealth();
     void setEnteredLevel(bool entered);
 
-    void updatePlayer(const Map& map);
+    void updatePlayer(Map& map);
 
     void updatePositionX(const Map& map);
 

@@ -25,9 +25,11 @@ namespace Formatting{
 
 void mainMenuHandling(Game& game);
 void pausedMenuHandling(Game& game);
+void victoryMenuHandling(Game& game);
 
 void drawMainMenu(const MenusSelection& selection);
 void drawPausedMenu(const MenusSelection& selection);
+void drawVictoryMenu();
 
 void drawTitle();
 

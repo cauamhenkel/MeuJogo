@@ -45,6 +45,9 @@ void Map::createMap() {
     };
 }
 
+void Map::goToNextLevel(){
+    ++m_level;
+}
 
 void Map::drawImageMap(){
     Color color {};
@@ -57,6 +60,9 @@ void Map::drawImageMap(){
             case 'H':
             case 'X':
                 color = YELLOW;
+                break;
+            case 'F':
+                color = PURPLE;
                 break;
             default:
                 color = BLANK;

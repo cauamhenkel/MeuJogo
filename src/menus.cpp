@@ -9,19 +9,19 @@ void mainMenuHandling(Game& game){
     }
 
     switch(game.menusSelections.mainMenuSelection){
-        case MainMenuSelection::Play:
-            if (IsKeyPressed(KEY_ENTER)){
-                game.gameState = GameState::InGame;
-                game.player.setMaxHealth();
-                game.player.setEnteredLevel(true);
-            }
-            break;
-        case MainMenuSelection::Continue:
-            break;
-        case MainMenuSelection::Exit:
-            if (IsKeyPressed(KEY_ENTER)){
-                game.menusSelections.exitGame = true;
-            }
+    case MainMenuSelection::Play:
+        if (IsKeyPressed(KEY_ENTER)){
+            game.gameState = GameState::InGame;
+            game.player.setMaxHealth();
+            game.player.setEnteredLevel(true);
+        }
+        break;
+    case MainMenuSelection::Continue:
+        break;
+    case MainMenuSelection::Exit:
+        if (IsKeyPressed(KEY_ENTER)){
+             game.menusSelections.exitGame = true;
+        }
     }
 }
 
@@ -34,20 +34,26 @@ void pausedMenuHandling(Game& game){
     }
 
     switch(game.menusSelections.pauseSelection){
-        case PauseSelection::Continue:
-            if (IsKeyPressed(KEY_ENTER)){
-                game.gameState = GameState::InGame;
-            }
-            break;
-        case PauseSelection::MainMenu:
-            if (IsKeyPressed(KEY_ENTER)){
-                game.gameState = GameState::MainMenu;
-            }
-            break;
-        case PauseSelection::Exit:
-            if (IsKeyPressed(KEY_ENTER)){
-                game.menusSelections.exitGame = true;
-            }
+    case PauseSelection::Continue:
+        if (IsKeyPressed(KEY_ENTER)){
+            game.gameState = GameState::InGame;
+        }
+        break;
+    case PauseSelection::MainMenu:
+        if (IsKeyPressed(KEY_ENTER)){
+            game.gameState = GameState::MainMenu;
+        }
+        break;
+    case PauseSelection::Exit:
+        if (IsKeyPressed(KEY_ENTER)){
+            game.menusSelections.exitGame = true;
+        }
+    }
+}
+
+void victoryMenuHandling(Game& game){
+    if (IsKeyPressed(KEY_ENTER)){
+        game.gameState = GameState::MainMenu;
     }
 }
 
@@ -83,6 +89,14 @@ void drawPausedMenu(const MenusSelection& selection){
                        ? Formatting::selectedButtonInnerColor : Formatting::buttonInnerColor);
     drawButtonMenu(button3Text, Formatting::button3PosY, (selection.pauseSelection == PauseSelection::Exit) 
                        ? Formatting::selectedButtonInnerColor : Formatting::buttonInnerColor);
+}
+
+void drawVictoryMenu(){
+    const char* victoryMessage {"You won! Congratulations!"};
+    
+    ClearBackground(DARKGRAY);
+    drawTextWithEdge(victoryMessage, Formatting::titleFontSize/2, Formatting::titleTextEdge,
+                     Constants::tileHeight * 10, GREEN, Formatting::textEdgeColor);
 }
 
 void drawTitle(){

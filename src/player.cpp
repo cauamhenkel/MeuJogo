@@ -29,7 +29,11 @@ void Player::setEnteredLevel(bool entered){
     m_enteredLevel = entered;
 }
 
-void Player::updatePlayer(const Map& map){
+void Player::updatePlayer(Map& map){
+    if (onElement(map, Elements::crystal)){
+        setEnteredLevel(true);
+        map.goToNextLevel();
+    }
     if ((IsKeyPressed(KEY_W) || IsKeyPressed(KEY_S)) && (onStairs(map) || onPlatform(map))){
         m_body.state = EntityState::InStairs;
         centralizePlayerOnStairs(map);

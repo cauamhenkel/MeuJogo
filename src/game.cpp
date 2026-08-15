@@ -42,77 +42,77 @@ void getCameraPosition(Game& game){
 
 void processGame(Game& game){
     switch (game.gameState){
-        case GameState::MainMenu:
-            mainMenuHandling(game);
-            break;
+    case GameState::MainMenu:
+        mainMenuHandling(game);
+        break;
 
-        case GameState::InGame:
-            // Runs only one time, rigth after entering the level
-            if (game.player.hasEnteredLevel()){
-                if (playerWon(game.map)){
-                    game.gameState = GameState::Victory;
-                }
-                else{
-                    game.map.createMap();
-                    game.map.createImageMap();
+    case GameState::Paused:
+        pausedMenuHandling(game);
+        break;
 
-                    game.player.placeInMap(game.map);
-                    game.player.resetPlayer();
-                }
+    case GameState::Victory:
+        victoryMenuHandling(game);
+        break;
 
-                game.player.setEnteredLevel(false);
+    case GameState::Defeat:
+        break;
+    case GameState::InGame:
+        // Runs only one time, rigth after entering the level
+        if (game.player.hasEnteredLevel()){
+            if (playerWon(game.map)){
+                game.gameState = GameState::Victory;
             }
-            if(game.gameState == GameState::InGame){
-                if (IsKeyPressed(KEY_TAB)){
-                    game.gameState = GameState::Paused;
-                    game.menusSelections.pauseSelection = PauseSelection::Continue;
-                }
-                game.player.updatePlayer(game.map);
+            else{
+                game.map.createMap();
+                game.map.createImageMap();
 
-                getCameraPosition(game);
+                game.player.placeInMap(game.map);
+                game.player.resetPlayer();
             }
-            break;
 
-        case GameState::Paused:
-            pausedMenuHandling(game);
-            break;
-
-        case GameState::Victory:
-            break;
-
-        case GameState::Defeat:
-            break;
+            game.player.setEnteredLevel(false);
         }
+        if(game.gameState == GameState::InGame){
+            if (IsKeyPressed(KEY_TAB)){
+                game.gameState = GameState::Paused;
+                game.menusSelections.pauseSelection = PauseSelection::Continue;
+            }
+            game.player.updatePlayer(game.map);
+
+            getCameraPosition(game);
+        }
+        break;
+    }
 }
 
 void drawGame(Game& game){
     BeginDrawing();
-        
-        switch (game.gameState){
-        case GameState::MainMenu:
-            drawMainMenu(game.menusSelections);
-            break;
+    switch (game.gameState){
+    case GameState::MainMenu:
+        drawMainMenu(game.menusSelections);
+        break;
 
-        case GameState::InGame:
-            ClearBackground(BLACK);
-            BeginMode2D(game.camera);
+    case GameState::InGame:
+        ClearBackground(BLACK);
+        BeginMode2D(game.camera);
             
-            game.map.drawMap();
-            game.player.drawPlayer();
+        game.map.drawMap();
+        game.player.drawPlayer();
             
-            EndMode2D();
-            break;
+        EndMode2D();
+        break;
 
-        case GameState::Paused:
-            drawPausedMenu(game.menusSelections);
-            break;
+    case GameState::Paused:
+        drawPausedMenu(game.menusSelections);
+        break;
 
-        case GameState::Victory:
-            break;
+    case GameState::Victory:
+        drawVictoryMenu();
+        break;
 
-        case GameState::Defeat:
-            break;
-        }
+    case GameState::Defeat:
+        break;
+    }
 
     EndDrawing();
 }

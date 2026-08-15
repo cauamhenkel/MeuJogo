@@ -23,6 +23,8 @@ public:
 
     // create the array of the map
     void createMap();
+    // go to the next level
+    void goToNextLevel();
     // draw all the tiles of the map
     void drawImageMap();
     // create a single texture for the map
